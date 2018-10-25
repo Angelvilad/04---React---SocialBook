@@ -36,25 +36,40 @@ class LoginForm extends Component {
   render () {
     return (
       <div className="login-form-wrapper">
-        <label>Usuario:&nbsp;<input value={this.state.user} onChange={this.updateUser}/></label>
-        <label>Password:&nbsp;<input/></label>
-        <button>Enviar</button>
+        <label>Usuario:&nbsp;<input onChange={(event) => this.updateState(event, 'user')}/></label>
+        <label>Password:&nbsp;<input onChange={(event) => this.updateState(event, 'password')}/></label>
+        <button onClick={this.checkLogin}>Enviar</button>
+        <p>{JSON.stringify(this.state)}</p>
       </div>  
     );
   }
   state = {
-    user: '',
-    password: ''
+    user:'r',
+    password: '',
+    authors: []
   }
-  updateUser = event => {
-    return this.setState({user: event.target.value})
+  updateState = (event, prop) => {
+
+    const state = {};
+    
+    state[prop] = event.target.value;
+    this.setState(state);
+  }
+  updatePass = event => {
+    this.setState({password: event.target.value});
   }
 }
 
 
 export default App;
 
-const users = {
-  user: 'Pepe',
-  password: 'pepito'
+const authors = [
+  {
+    user: 'Pepe',
+    password: 'pepito'
+  },
+  {
+    user: 'Angel',
+    password: 'angelito'
   }
+]
