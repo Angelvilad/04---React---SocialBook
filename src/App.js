@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Link, Route} from 'react-router-dom';
+import {createStore} from 'redux';
+import {Provider, connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <div className="main-container" >
-          <Header />
-          {/*<Route path="/" component=>*/}
-          <Route path="/login/" component={LoginForm} />
-        </div> 
-      </BrowserRouter>
-     
-    );
-  }
-}
-
+const App = () =>
+  <Provider>
+    <BrowserRouter>
+      <div className="main-container" >
+        <Header />
+        {/*<Route path="/" component=>*/}
+        <Route path="/login/" component={LoginForm} />
+      </div> 
+    </BrowserRouter>
+  </Provider>
+  
 const Header = () =>
   <header>
     <div className="main-title">
