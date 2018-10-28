@@ -5,27 +5,12 @@ import {Provider, connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 
+import store from './store';
 import Header from './components/Header';
 import LoginForm from './components/LoginForm';
 
 // crear store y asignarla en provider. Conectar al estado los componentes (por ejem Header)
 // voy por metodo de checklogin. Estado global redux de prueba creado
-const initialState = {
-  logged: false
-}
-const rootReducer = (state, action) => {
-  switch(action.type) {
-    case 'LOGGED':
-      return {logged: true};
-    default:
-     return state;
-  }
-};
-
-const store = createStore(
-  rootReducer,
-  initialState
-);
 
 const App = () =>
   <Provider store={store}>
