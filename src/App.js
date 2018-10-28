@@ -53,41 +53,36 @@ class LoginForm extends Component {
   render () {
     return (
       <div className="login-form-wrapper">
-        <label>Usuario:&nbsp;<input onChange={(event) => this.updateState(event, 'user')}/></label>
-        <label>Password:&nbsp;<input onChange={(event) => this.updateState(event, 'password')}/></label>
+        <label>Nombre de usuario:&nbsp;<input onChange={(event) => this.updateState(event, 'userInput')}/></label>
+        <label>Password:&nbsp;<input onChange={(event) => this.updateState(event, 'passInput')}/></label>
         <button onClick={this.checkLogin}>Enviar</button>
         <p>{JSON.stringify(this.state)}</p>
       </div>  
     );
   }
   state = {
-    user:'r',
-    password: '',
+    userInput:'r',
+    passInput: '',
     authors: []
   }
+  componentDidMount() {
+    fetch('https://randomuser.me/api?results=10&seed=abc')
+      .then(response => response.json())
+      .then(({results}) => this.setState({
+        authors: results
+      }))
+  }
   updateState = (event, prop) => {
-
-    const state = {};
-    
+    const state = {};    
     state[prop] = event.target.value;
     this.setState(state);
   }
   checkLogin = () => {
-    const userLogged = authors.filter(author => author.user === this.state.user && author.password === this.state.password);
-    console.log('El usuario loggeado es:', JSON.stringify(userLogged));
+    const [userLogged] = this.state.authors.filter(
+      author => author.login.username === this.state.userInput && author.login.password === this.state.passInput);
+      console.log('El usuario loggeado es:', JSON.stringify(userLogged));
   }
 }
 
 
 export default App;
-
-const authors = [
-  {
-    user: 'Pepe',
-    password: 'pepito'
-  },
-  {
-    user: 'Angel',
-    password: 'angelito'
-  }
-]
