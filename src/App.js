@@ -5,8 +5,27 @@ import {Provider, connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 
+// crear store y asignarla en provider. Conectar al estado los componentes (por ejem Header)
+// voy por metodo de checklogin. Estado global redux de prueba creado
+const initialState = {
+  logged: false
+}
+const rootReducer = (state, action) => {
+  switch(action.type) {
+    case 'LOGGED':
+      return {logged: true};
+    default:
+     return state;
+  }
+};
+
+const store = createStore(
+  rootReducer,
+  initialState
+);
+
 const App = () =>
-  <Provider>
+  <Provider store={store}>
     <BrowserRouter>
       <div className="main-container" >
         <Header />
@@ -15,7 +34,7 @@ const App = () =>
       </div> 
     </BrowserRouter>
   </Provider>
-  
+
 const Header = () =>
   <header>
     <div className="main-title">
@@ -53,8 +72,9 @@ class LoginForm extends Component {
     state[prop] = event.target.value;
     this.setState(state);
   }
-  updatePass = event => {
-    this.setState({password: event.target.value});
+  checkLogin = () => {
+    const userLogged = authors.filter(author => author.user === this.state.user && author.password === this.state.password);
+    console.log('El usuario loggeado es:', JSON.stringify(userLogged));
   }
 }
 
