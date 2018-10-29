@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+// Action Creators
+const LOGGED = 'LOGGED';
+const doLog = (user) => ({
+  type: LOGGED,
+  payload: user
+});
+
 
 class LoginFormView extends Component {
     render () {
@@ -37,14 +44,11 @@ class LoginFormView extends Component {
         this.props.logged(userLogged);
     }
   }
-
+      
   const LoginForm = connect(
     state => state,
     dispatch => ({
-        logged : (user) => dispatch({
-            type: 'LOGGED',
-            payload: user
-        })
+        logged : (user) => dispatch(doLog(user))
     })
   )(LoginFormView);
 
