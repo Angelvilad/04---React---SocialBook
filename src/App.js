@@ -9,9 +9,6 @@ import store from './store';
 import Header from './components/Header';
 import LoginForm from './components/LoginForm';
 
-// crear store y asignarla en provider. Conectar al estado los componentes (por ejem Header)
-// voy por metodo de checklogin. Estado global redux de prueba creado
-
 const App = () =>
   <Provider store={store}>
     <BrowserRouter>

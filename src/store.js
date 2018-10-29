@@ -1,12 +1,12 @@
 import {createStore} from 'redux';
 
 const initialState = {
-    logged: false
+    login: false
   }
   const rootReducer = (state, action) => {
     switch(action.type) {
       case 'LOGGED':
-        return {logged: true};
+        return {login: (action.payload || false)};
       default:
        return state;
     }

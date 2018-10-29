@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 
-class LoginForm extends Component {
+class LoginFormView extends Component {
     render () {
       return (
         <div className="login-form-wrapper">
           <label>Nombre de usuario:&nbsp;<input onChange={(event) => this.updateState(event, 'userInput')}/></label>
           <label>Password:&nbsp;<input onChange={(event) => this.updateState(event, 'passInput')}/></label>
           <button onClick={this.checkLogin}>Enviar</button>
-          <p>{JSON.stringify(this.state)}</p>
+        {/*<p>{JSON.stringify(this.state)}</p>*/}
+
         </div>  
       );
     }
@@ -32,8 +34,18 @@ class LoginForm extends Component {
     checkLogin = () => {
       const [userLogged] = this.state.authors.filter(
         author => author.login.username === this.state.userInput && author.login.password === this.state.passInput);
-        console.log('El usuario loggeado es:', JSON.stringify(userLogged));
+        this.props.logged(userLogged);
     }
   }
+
+  const LoginForm = connect(
+    state => state,
+    dispatch => ({
+        logged : (user) => dispatch({
+            type: 'LOGGED',
+            payload: user
+        })
+    })
+  )(LoginFormView);
 
   export default LoginForm;
