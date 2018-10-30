@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 // Action Creators
 const LOGGED = 'LOGGED';
@@ -16,8 +17,10 @@ class LoginFormView extends Component {
           <label>Nombre de usuario:&nbsp;<input onChange={(event) => this.updateState(event, 'userInput')}/></label>
           <label>Password:&nbsp;<input onChange={(event) => this.updateState(event, 'passInput')}/></label>
           <button onClick={this.checkLogin}>Enviar</button>
-        {/*<p>{JSON.stringify(this.state)}</p>*/}
-
+          {
+            this.props.login && 
+            <Redirect to="/" />
+          }
         </div>  
       );
     }
