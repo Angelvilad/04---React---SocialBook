@@ -7,14 +7,15 @@ import './App.css';
 
 import Header from './components/Header';
 import LoginForm from './components/LoginForm';
-import BodyPage from './components/BodyPage';
+import Main from './components/Main';
+import MainLogout from './components/MainLogout';
 
 const App = (props) =>
     <BrowserRouter>
       <div className="main-container" >
         <Header />
         <Switch>
-          <Route exact path="/" component={BodyPage} />
+          <Route exact path="/" component={props.login ? Main : MainLogout} />
           <Route path="/login/" component={LoginForm} />
         </Switch>
       </div> 
