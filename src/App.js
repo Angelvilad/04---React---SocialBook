@@ -5,13 +5,11 @@ import {Provider, connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 
-import store from './store';
 import Header from './components/Header';
 import LoginForm from './components/LoginForm';
 import BodyPage from './components/BodyPage';
 
-const App = () =>
-  <Provider store={store}>
+const App = (props) =>
     <BrowserRouter>
       <div className="main-container" >
         <Header />
@@ -21,6 +19,5 @@ const App = () =>
         </Switch>
       </div> 
     </BrowserRouter>
-  </Provider>
 
 export default App;
