@@ -10,6 +10,9 @@ import LoginForm from './components/LoginForm';
 import Main from './components/Main';
 import MainLogout from './components/MainLogout';
 
+// guardar lo usuarios en local estorage cuandoel fetch del login?? ok
+// usar thunk para hacer dispatch de action READY (usuarios leidos) en lugar de encadenar thens cuando haga el fetch?
+
 const App = (props) =>
     <BrowserRouter>
       <div className="main-container" >

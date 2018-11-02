@@ -9,6 +9,12 @@ const doLog = (user) => ({
   payload: user
 });
 
+const READY = 'READY';
+const setAuthors = (authors) => ({
+  type: READY,
+  payload: authors
+})
+
 
 class LoginFormView extends Component {
     render () {
@@ -26,15 +32,12 @@ class LoginFormView extends Component {
     }
     state = {
       userInput:'r',
-      passInput: '',
-      authors: []
+      passInput: ''
     }
     componentDidMount() {
       fetch('https://randomuser.me/api?results=10&seed=abc')
         .then(response => response.json())
-        .then(({results}) => this.setState({
-          authors: results
-        }))
+        .then(({results}) => this.props.setAuthors(results))
     }
     updateState = (event, prop) => {
       const state = {};    
@@ -42,16 +45,17 @@ class LoginFormView extends Component {
       this.setState(state);
     }
     checkLogin = () => {
-      const [userLogged] = this.state.authors.filter(
+      const [userLogged] = this.props.authors.filter(
         author => author.login.username === this.state.userInput && author.login.password === this.state.passInput);
-        this.props.logged(userLogged);
+      this.props.logged(userLogged);
     }
   }
       
   const LoginForm = connect(
     state => state,
     dispatch => ({
-        logged : (user) => dispatch(doLog(user))
+        logged : (user) => dispatch(doLog(user)),
+        setAuthors: (authors) => dispatch(setAuthors(authors))
     })
   )(LoginFormView);
 

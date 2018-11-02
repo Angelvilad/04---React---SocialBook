@@ -1,23 +1,33 @@
 import {createStore, combineReducers} from 'redux';
 
-const initialState = {
-    login: false
-  };
-
-  const rootReducer = (state, action) => {
+  const loginReducer = (loginState = false, action) => {
     switch(action.type) {
       case 'LOGGED':
-        return {login: (action.payload || false)};
+        return action.payload || false;
       case 'LOGOUT':
-        return {login: false};
-        default:
-       return state;
+        return false;
+      default:
+       return loginState;
     }
-  };
+  }
+
+  const authorsReducer = (authorsState = [], action) => {
+    switch(action.type) {
+      case 'READY':
+        return action.payload
+      default:
+        return authorsState;
+    }
+  }
+
+  const rootReducer = combineReducers({
+    login: loginReducer,
+    authors: authorsReducer
+  })
+  
   
   const store = createStore(
-    rootReducer,
-    initialState
+    rootReducer
   );
 
   export default store;
