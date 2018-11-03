@@ -37,8 +37,12 @@ class LoginFormView extends Component {
           <label>Password:&nbsp;<input onChange={(event) => this.updateState(event, 'passInput')}/></label>
           <button onClick={this.checkLogin}>Enviar</button>
           {
+            this.props.authors.loading &&
+              <p>LOADING, PLEASE WAIT</p>
+          }
+          {
             this.props.login && 
-            <Redirect to="/" />
+              <Redirect to="/" />
           }
         </div>  
       );
