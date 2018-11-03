@@ -9,11 +9,11 @@ const doLog = (user) => ({
   payload: user
 });
 
-const GET_AUTHORS_STARTED = 'GET_AUTHORS_STARTED';
-const GET_AUTHORS_COMPLETED = 'GET_AUTHORS_COMPLETED';
-const GET_AUTHORS_ERROR = 'GET_AUTHORS_ERROR';
-const getAuthors = () => dispatch => {
-  dispatch({type: GET_AUTHORS_STARTED})
+const FETCH_AUTHORS_STARTED = 'FETCH_AUTHORS_STARTED';
+const FETCH_AUTHORS_COMPLETED = 'FETCH_AUTHORS_COMPLETED';
+const FETCH_AUTHORS_ERROR = 'FETCH_AUTHORS_ERROR';
+const fetchAuthors = () => dispatch => {
+  dispatch({type: FETCH_AUTHORS_STARTED})
 
   fetch('https://randomuser.me/api?results=10&seed=abc')
         .then(response => {
@@ -23,9 +23,9 @@ const getAuthors = () => dispatch => {
           return response.json()
         })
         .then(({results}) => {
-          dispatch({type: GET_AUTHORS_COMPLETED, payload: results})
+          dispatch({type: FETCH_AUTHORS_COMPLETED, payload: results})
         })
-        .catch((error) => dispatch({type: GET_AUTHORS_ERROR, payload: error}))
+        .catch((error) => dispatch({type: FETCH_AUTHORS_ERROR, payload: error}))
 }
 
 
@@ -48,7 +48,7 @@ class LoginFormView extends Component {
       passInput: ''
     }
     componentDidMount() {
-      this.props.setAuthors();
+      this.props.getAuthors();
     }
     updateState = (event, prop) => {
       const state = {};    
@@ -66,7 +66,7 @@ class LoginFormView extends Component {
     state => state,
     dispatch => ({
         logged : (user) => dispatch(doLog(user)),
-        setAuthors: () => dispatch(getAuthors())
+        getAuthors: () => dispatch(fetchAuthors())
     })
   )(LoginFormView);
 

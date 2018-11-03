@@ -12,22 +12,22 @@ const loginReducer = (loginState = false, action) => {
   }
 }
 
-const getAuthorsReducer = (getAuthorsState = {}, action) => {
+const fetchAuthorsReducer = (fetchAuthorsState = {}, action) => {
   switch (action.type) {
-    case 'GET_AUTHORS_STARTED':
+    case 'FETCH_AUTHORS_STARTED':
       return { loading: true }
-    case 'GET_AUTHORS_COMPLETED':
+    case 'FETCH_AUTHORS_COMPLETED':
       return { loading: false, authors: action.payload }
-    case 'GET_AUTHORS_ERROR':
+    case 'FETCH_AUTHORS_ERROR':
       return { loading: false, error: action.payload }
     default:
-      return getAuthorsState
+      return fetchAuthorsState
   }
 }
 
 const rootReducer = combineReducers({
   login: loginReducer,
-  authors: getAuthorsReducer
+  authors: fetchAuthorsReducer
 })
 
 
