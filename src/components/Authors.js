@@ -9,7 +9,7 @@ const AuthorsView = (props) =>
             {
                 props.authors.authors.map(author =>
                     <li key={author.login.uuid}>
-                        <Author author={author}/>
+                        <Author details={author}/>
                     </li>
                 )
             }

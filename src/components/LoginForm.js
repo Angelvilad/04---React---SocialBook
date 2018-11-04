@@ -41,7 +41,7 @@ class LoginFormView extends Component {
               <p>LOADING, PLEASE WAIT</p>
           }
           {
-            this.props.login && 
+            this.props.login && // se pinta cuando cambia state a login, entonces route no sigue escuchando a login ni por lo tanto este redirect
               <Redirect to="/" />
           }
         </div>  
