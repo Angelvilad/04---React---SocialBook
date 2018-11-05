@@ -7,11 +7,13 @@ const AuthorsView = (props) =>
     <div className="Authors-wrapper">
         <ul>
             {
-                props.authors.authors.map(author =>
+                props.authors.authors.filter(author =>
+                    author !== props.login
+                ).map(author =>
                     <li key={author.login.uuid}>
                         <Author details={author}/>
                     </li>
-                )
+                    )
             }
         </ul>
     </div>
