@@ -4,10 +4,9 @@ import {connect} from 'react-redux';
 import fullName from '../utils/utils';
 
 const ProfileView = (props) => {
-    const [author] = props.authors.authors.filter(author =>
-        author.login.uuid === props.match.params.uuidAuthor);
+    const author = props.location.state.author
     return (
-        <div className="Profile-wrapper">
+        <div className="AuthorProfile-wrapper">
             <h2>Perfil de <span className="full-name">{fullName(author)}</span></h2> 
             <img src={author.picture.large} />
         </div>
