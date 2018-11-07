@@ -21,16 +21,20 @@ import Restringed from './components/Restringed';
 // voy por: mirar de volver a cambiar AuthorProfile a Profile y utilizar este componente tanto para authores como para el usuario...¿pasar estado en el link / route?
 // cambiar en redux propiedad login del status por user por ejemplo
 
-const App = (props) =>
-    <BrowserRouter>
-      <div className="main-container" >
-        <Header />        
-              <Switch>
-                <Route exact path="/" component={props.login.logged ? Main : MainLogout} />
-                <Route path="/login/" component={LoginForm} />
-                <Route path="/profile/:uuidAuthor" component={props.login.logged ? Profile : Restringed} />
-              </Switch>             
-      </div> 
-    </BrowserRouter>
-
+class App extends Component {
+  render () {
+    return (
+      <BrowserRouter>
+        <div className="main-container" >
+          <Header />        
+          <Switch>
+            <Route exact path="/" component={this.props.login.logged ? Main : MainLogout} />
+            <Route path="/login/" component={LoginForm} />
+            <Route path="/profile/:uuidAuthor" component={this.props.login.logged ? Profile : Restringed} />
+          </Switch>             
+        </div> 
+      </BrowserRouter>
+    );    
+  }
+}
 export default App;
