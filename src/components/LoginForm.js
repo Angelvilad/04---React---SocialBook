@@ -28,7 +28,6 @@ const fetchAuthors = () => dispatch => {
         .catch((error) => dispatch({type: FETCH_AUTHORS_ERROR, payload: error}))
 }
 
-
 class LoginFormView extends Component {
     render () {
       return (
@@ -73,7 +72,7 @@ const LoginForm = connect(
     state => state,
     dispatch => ({
         log : (user) => dispatch(doLog(user)),
-        getAuthors: () => dispatch(fetchAuthors())
+        getAuthors: () => dispatch(fetchAuthors()),
     })
   )(LoginFormView);
 

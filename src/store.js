@@ -25,9 +25,19 @@ const AuthorsReducer = (AuthorsState = {}, action) => {
   }
 }
 
+const userDataReducer = (userDataState = {}, action) => {
+  switch (action.type) {
+    case 'USERDATA_RETRIEVED':
+      return { data: action.payload || 'sin datos' }
+    default:
+      return userDataState
+  }
+}
+
 const rootReducer = combineReducers({
   login: loginReducer,
-  authors: AuthorsReducer
+  authors: AuthorsReducer,
+  userData: userDataReducer
 })
 
 
