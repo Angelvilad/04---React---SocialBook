@@ -8,7 +8,7 @@ const AuthorsView = (props) =>
         <ul>
             {
                 props.authors.authors.filter(author =>
-                    author !== props.login
+                    author !== props.login.user
                 ).map(author =>
                     <li key={author.login.uuid}>
                         <Author details={author}/>

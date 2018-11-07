@@ -41,7 +41,7 @@ class LoginFormView extends Component {
               <p>LOADING, PLEASE WAIT</p>
           }
           {
-            this.props.login && // se pinta cuando cambia state a login, entonces route no sigue escuchando a login ni por lo tanto este redirect
+            this.props.login.logged &&
               <Redirect to="/" />
           }
         </div>  
@@ -60,16 +60,19 @@ class LoginFormView extends Component {
       this.setState(state);
     }
     checkLogin = () => {
-      const [userLogged] = this.props.authors.authors.filter(
+      const [userMatched] = this.props.authors.authors.filter(
         author => author.login.username === this.state.userInput && author.login.password === this.state.passInput);
-      this.props.logged(userLogged);
+      if (userMatched)  {
+        this.props.log(userMatched);
+      }
+      /*userMatched && this.props.log(userMatched) */
     }
-  }
+}
       
-  const LoginForm = connect(
+const LoginForm = connect(
     state => state,
     dispatch => ({
-        logged : (user) => dispatch(doLog(user)),
+        log : (user) => dispatch(doLog(user)),
         getAuthors: () => dispatch(fetchAuthors())
     })
   )(LoginFormView);

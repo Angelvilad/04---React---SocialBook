@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 const loginReducer = (loginState = false, action) => {
   switch (action.type) {
     case 'LOGGED':
-      return action.payload || false;
+      return {logged: true, user: action.payload};
     case 'LOGOUT':
       return false;
     default:

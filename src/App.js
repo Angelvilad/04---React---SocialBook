@@ -12,21 +12,23 @@ import MainLogout from './components/MainLogout';
 import Profile from './components/Profile';
 import Restringed from './components/Restringed';
 
-// guardar lo usuarios en local estorage cuandoel fetch del login?? ok
-// usar thunk para action creator asincrona que haga fetch y dispatche la accion entonces (antes de cargar, cargado y error?) ok
+// OK -guardar lo usuarios en local estorage cuandoel fetch del login??
+// OK -usar thunk para action creator asincrona que haga fetch y dispatche la accion entonces (antes de cargar, cargado y error?)
 // Hacer pagina Not Found
 // Desabilitar boton enviar mientras estamos requiriendo los usuarios en el login
-// Cuando muestre lista autores no muestre usuario logeado (en el map lo puedo controlar)
-// Voy por: sacar perfil de usuario clickado. No deberia dejarme ver si no estoy logeado. ...comprobar en cada pagina si esta logeado??)
+// OK -Cuando muestre lista autores no muestre usuario logeado (en el map lo puedo controlar)
+// sacar perfil de usuario clickado. No deberia dejarme ver si no estoy logeado. ...comprobar en cada pagina si esta logeado??)
+// voy por: mirar de volver a cambiar AuthorProfile a Profile y utilizar este componente tanto para authores como para el usuario...¿pasar estado en el link / route?
+// cambiar en redux propiedad login del status por user por ejemplo
 
 const App = (props) =>
     <BrowserRouter>
       <div className="main-container" >
         <Header />        
               <Switch>
-                <Route exact path="/" component={props.login ? Main : MainLogout} />
+                <Route exact path="/" component={props.login.logged ? Main : MainLogout} />
                 <Route path="/login/" component={LoginForm} />
-                <Route path="/profile/:uuidAuthor" component={props.login ? Profile : Restringed} />
+                <Route path="/profile/:uuidAuthor" component={props.login.logged ? Profile : Restringed} />
               </Switch>             
       </div> 
     </BrowserRouter>
