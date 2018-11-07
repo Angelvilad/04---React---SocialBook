@@ -60,7 +60,7 @@ class LoginFormView extends Component {
       this.setState(state);
     }
     checkLogin = () => {
-      const [userMatched] = this.props.authors.authors.filter(
+      const [userMatched] = this.props.authors.data.filter(
         author => author.login.username === this.state.userInput && author.login.password === this.state.passInput);
       if (userMatched)  {
         this.props.log(userMatched);

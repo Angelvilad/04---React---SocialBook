@@ -1,33 +1,33 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-const loginReducer = (loginState = false, action) => {
+const loginReducer = (loginState = {}, action) => {
   switch (action.type) {
     case 'LOGGED':
-      return {logged: true, user: action.payload};
+      return { logged: true, user: action.payload };
     case 'LOGOUT':
-      return false;
+      return {};
     default:
       return loginState;
   }
 }
 
-const fetchAuthorsReducer = (fetchAuthorsState = {}, action) => {
+const AuthorsReducer = (AuthorsState = {}, action) => {
   switch (action.type) {
     case 'FETCH_AUTHORS_STARTED':
       return { loading: true }
     case 'FETCH_AUTHORS_COMPLETED':
-      return { loading: false, authors: action.payload }
+      return { loading: false, data: action.payload }
     case 'FETCH_AUTHORS_ERROR':
       return { loading: false, error: action.payload }
     default:
-      return fetchAuthorsState
+      return AuthorsState
   }
 }
 
 const rootReducer = combineReducers({
   login: loginReducer,
-  authors: fetchAuthorsReducer
+  authors: AuthorsReducer
 })
 
 

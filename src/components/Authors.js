@@ -7,7 +7,7 @@ const AuthorsView = (props) =>
     <div className="Authors-wrapper">
         <ul>
             {
-                props.authors.authors.filter(author =>
+                props.authors.data.filter(author =>
                     author !== props.login.user
                 ).map(author =>
                     <li key={author.login.uuid}>
