@@ -69,7 +69,10 @@ class LoginFormView extends Component {
 }
       
 const LoginForm = connect(
-    state => state,
+    state => ({
+      login: state.login,
+      authors: state.authors
+    }),
     dispatch => ({
         log : (user) => dispatch(doLog(user)),
         getAuthors: () => dispatch(fetchAuthors()),

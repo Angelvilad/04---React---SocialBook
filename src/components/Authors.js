@@ -19,7 +19,10 @@ const AuthorsView = (props) =>
     </div>
 
 const Authors = connect(
-    state => state
+    state => ({
+        login: state.login,
+        authors: state.authors
+    }),
 )(AuthorsView);
 
 export default Authors;

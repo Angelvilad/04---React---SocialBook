@@ -35,7 +35,9 @@ const HeaderView = (props) =>
   </header>
 
   const Header = connect(
-    state => state,
+    state => ({
+      login: state.login
+    }),
     dispatch => ({
       logOut: () => dispatch(doLogOut())
     })

@@ -17,9 +17,9 @@ import Restringed from './components/Restringed';
 // Hacer pagina Not Found
 // Desabilitar boton enviar mientras estamos requiriendo los usuarios en el login
 // OK -Cuando muestre lista autores no muestre usuario logeado (en el map lo puedo controlar)
-// sacar perfil de usuario clickado. No deberia dejarme ver si no estoy logeado. ...comprobar en cada pagina si esta logeado??)
-// voy por: mirar de volver a cambiar AuthorProfile a Profile y utilizar este componente tanto para authores como para el usuario...¿pasar estado en el link / route?
-// cambiar en redux propiedad login del status por user por ejemplo
+// OK sacar perfil de usuario clickado. No deberia dejarme ver si no estoy logeado. ...comprobar en cada pagina si esta logeado??)
+// OK mirar de volver a cambiar AuthorProfile a Profile y utilizar este componente tanto para authores como para el usuario...¿pasar estado en el link / route?
+// OK cambiar en redux propiedad login del status por user por ejemplo
 
 //Action Creator (thunk)
 const USERDATA_RETRIEVED = 'USERDATA_RETRIEVED';
@@ -51,11 +51,13 @@ class AppView extends Component {
       this.props.getUserData(user.login.uuid);
     }
   }
-
 }
 
 const App = connect(
-  state => state,
+  state => ({
+    login: state.login,
+    userData: state.userData
+  }),
   dispatch => ({
       getUserData: (userid) => dispatch(getData(userid))
   })
