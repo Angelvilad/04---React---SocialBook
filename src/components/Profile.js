@@ -4,14 +4,16 @@ import {connect} from 'react-redux';
 import fullName from '../utils/utils';
 
 const ProfileView = (props) => {
-    const user = props.location.state.author === props.login.user; //mirar de cambiar sistema de recibir el author para el perfil..asi da error cuando navegamos adelante y atras..¿obtener parametro de la url?
-    const author = props.location.state.author;
+    const [author] = props.authors.data.filter(author =>
+        author.login.uuid === props.match.params.uuidAuthor);
+    const isUser = author === props.login.user;
+    // Hacer comprobacion por si author es undefined (seria que no coincide ninguno de la lista de authors con el param de la url (por ejemplo si se pone a mano)) y si es undefined mandar a pagenotfound
     return (
         <div className="AuthorProfile-wrapper">
             <h2>Perfil de <span className="full-name">{fullName(author)}</span></h2> 
             <img src={author.picture.large} />
             {
-                user &&
+                isUser &&
                 <div>
                     <p>Solicitudes de seguimiento:</p>
                     <p>Escribir un articulo</p>
@@ -19,7 +21,7 @@ const ProfileView = (props) => {
 
             }
             {
-                !user && /* ejemplo, si no soy yo y no somos amigos: props.userData.data.friends.filter(friend => friend === props.location.state.author ) */
+                !isUser && // ejemplo, si no soy yo y no somos amigos: props.userData.data.friends.filter(friend => friend === props.location.state.author )
                 <p>PERFIL DE AUTHOR QUE NO ES EL USUARIO</p>
             }
         </div>
@@ -30,6 +32,7 @@ const ProfileView = (props) => {
 const Profile = connect(
     state => ({
         login: state.login,
+        authors: state.authors
     }),
 )(ProfileView);
 export default Profile;

@@ -6,10 +6,7 @@ const Author = (props) => {
     const details = props.details;
     return (
         <div className="Author-wrapper">
-            <Link to={{
-                pathname: `/profile/${details.login.uuid}`,
-                state: {author: details}
-            }} >
+            <Link to={`/profile/${details.login.uuid}`} >
                 <img className="avatar" src={details.picture.medium} />
             </Link>
         </div>

@@ -22,10 +22,7 @@ const HeaderView = (props) =>
           {props.login.logged && 
             <React.Fragment>
               <li>
-                <Link to={{
-                  pathname: `/profile/${props.login.user.login.uuid}`,
-                  state: {author: props.login.user}
-                }}>My Profile</Link></li>
+                <Link to={`/profile/${props.login.user.login.uuid}`}>My Profile</Link></li>
               <li><Link to="/" onClick={props.logOut}>Logout</Link></li>
             </React.Fragment>            
           }
