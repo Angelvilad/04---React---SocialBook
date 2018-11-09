@@ -15,8 +15,11 @@ const ProfileView = (props) => {
             {
                 isUser &&
                 <div>
-                    <p>Solicitudes de seguimiento:</p>
-                    <p>Escribir un articulo</p>
+                    <p>Solicitudes de seguimiento: {props.userData.friendRequest.length}</p>
+                    {
+                        /*<PostArticle></PostArticle>
+                        <PostedArticles></PostedArticles>*/
+                    }
                 </div>
 
             }
@@ -32,7 +35,8 @@ const ProfileView = (props) => {
 const Profile = connect(
     state => ({
         login: state.login,
-        authors: state.authors
+        authors: state.authors,
+        userData: state.userData.data
     }),
 )(ProfileView);
 export default Profile;
