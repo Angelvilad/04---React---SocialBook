@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import Article from './Article';
 
-const ArticlesView = (props) => {
+const Articles = (props) => {
     if (props.articles.length === 0) {
         return (
             <div className="articles-wrapper">
@@ -24,9 +24,9 @@ const ArticlesView = (props) => {
     }    
 }
 
-const Articles = connect(
+/*const Articles = connect(
     state => ({
         articles: state.userData.data.articles
     }),
-)(ArticlesView);
+)(ArticlesView);*/
 export default Articles;
