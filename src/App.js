@@ -24,7 +24,11 @@ import Restringed from './components/Restringed';
 //Action Creator (thunk)
 const USERDATA_RETRIEVED = 'USERDATA_RETRIEVED';
 const getData = (userid) => dispatch => {
-  const data = localStorage.getItem(userid);
+let data = JSON.parse(localStorage.getItem(userid));
+if (!data) {
+  data = {friends: [], friendRequest: [], articles: []}
+  localStorage.setItem(userid, JSON.stringify(data));
+}
   dispatch({ type: USERDATA_RETRIEVED, payload: data });
 }
 
@@ -45,9 +49,12 @@ class AppView extends Component {
   }
   componentDidUpdate() {
     /*user is logged and not retrieved data yet? Then retrieve user data */
+    /* mirar si en lugar de cuando se actualice, se haga esto cuando el usuario haga log */
+
     const { user } = this.props.login;
     const userData = this.props.userData.data;
     if (user && !userData) {
+      //localStorage.removeItem(user.login.uuid);
       this.props.getUserData(user.login.uuid);
     }
   }

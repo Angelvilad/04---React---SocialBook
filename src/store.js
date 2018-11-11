@@ -25,14 +25,15 @@ const AuthorsReducer = (AuthorsState = {}, action) => {
   }
 }
 
-const userDataReducer = (userDataState = {}, action) => {
-  const noData = {friends: [], friendRequest: [], comments: []};
+const userDataReducer = (userDataState = {friends: [], friendRequest: [], articles: []}, action) => {
   switch (action.type) {
     case 'USERDATA_RETRIEVED':
-      return { data: action.payload || noData }
+      return { data: action.payload }
+    case 'DATA_USER_UPDATED':
+      return { data: action.payload }
     default:
-      return userDataState
-  };
+      return userDataState  
+  }
 }
 
 const rootReducer = combineReducers({

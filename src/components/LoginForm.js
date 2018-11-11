@@ -47,7 +47,7 @@ class LoginFormView extends Component {
       );
     }
     state = {
-      userInput:'r',
+      userInput:'',
       passInput: ''
     }
     componentDidMount() {
