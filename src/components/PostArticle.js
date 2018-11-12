@@ -42,7 +42,7 @@ class PostArticleView extends Component {
 const PostArticle = connect(
     state => ({userId: state.login.user.login.uuid}),
     dispatch => ({
-        articlePosted: (dataUser) => dispatch({type: 'DATA_USER_UPDATED', payload: dataUser})
+        articlePosted: (dataUser) => dispatch({type: 'USERDATA_UPDATED', payload: dataUser})
     })
 )(PostArticleView);
 
