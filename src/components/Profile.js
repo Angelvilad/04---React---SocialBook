@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import PostArticle from './PostArticle';
 import Articles from './Articles';
@@ -9,9 +10,9 @@ import fullName from '../utils/utils';
 const ProfileView = (props) => {
     const [author] = props.authors.data.filter(author =>
         author.login.uuid === props.match.params.uuidAuthor);
-    /*if (!author) {
-        return <Redirect to="/notfound/" />
-    } si ninguno de la lista de autores coincide con la ruta */
+    if (!author) {
+        return <Redirect to="/PageNotfound/" />
+    } 
     const user = props.login.user;
     const isUser = author === user;
     const userData = props.userData;
