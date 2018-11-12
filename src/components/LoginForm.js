@@ -30,13 +30,17 @@ const fetchAuthors = () => dispatch => {
 
 class LoginFormView extends Component {
     render () {
+      const isLoading = this.props.authors.loading;
       return (
         <div className="login-form-wrapper">
           <label>Nombre de usuario:&nbsp;<input onChange={(event) => this.updateState(event, 'userInput')}/></label>
           <label>Password:&nbsp;<input onChange={(event) => this.updateState(event, 'passInput')}/></label>
-          <button onClick={this.checkLogin}>Enviar</button>
           {
-            this.props.authors.loading &&
+            !isLoading &&
+            <button onClick={this.checkLogin} >Enviar</button>
+          }
+          {
+            isLoading &&
               <p>LOADING, PLEASE WAIT</p>
           }
           {
