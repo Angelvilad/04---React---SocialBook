@@ -44,7 +44,7 @@ const ProfileView = (props) => {
                 <img src={author.picture.large} />
                 
                 {
-                    isFriend && // ejemplo, si no soy yo y no somos amigos: props.userData.data.friends.filter(friend => friend === props.location.state.author )
+                    isFriend &&
                     <Articles articles={authorData.articles} />
                 }
                 {
@@ -57,28 +57,6 @@ const ProfileView = (props) => {
             </div>
         );
     }
-    // Hacer comprobacion por si author es undefined (seria que no coincide ninguno de la lista de authors con el param de la url (por ejemplo si se pone a mano)) y si es undefined mandar a pagenotfound
-    /*return (
-        <div className="AuthorProfile-wrapper">
-            <h2>Perfil de <span className="full-name">{fullName(author)}</span></h2> 
-            <img src={author.picture.large} />
-            {
-                isUser &&
-                <div>
-                    <p>Solicitudes de seguimiento: {props.userData.friendRequest.length}</p>
-                    {
-                        /*<PostArticle></PostArticle>
-                        <PostedArticles></PostedArticles>
-                    }
-                </div>
-
-            }
-            {
-                !isUser && // ejemplo, si no soy yo y no somos amigos: props.userData.data.friends.filter(friend => friend === props.location.state.author )
-                <p>PERFIL DE AUTHOR QUE NO ES EL USUARIO</p>
-            }
-        </div>
-    );*/
 }
 
 

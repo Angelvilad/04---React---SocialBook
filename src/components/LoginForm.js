@@ -68,7 +68,6 @@ class LoginFormView extends Component {
       if (userMatched)  {
         this.props.log(userMatched);
       }
-      /*userMatched && this.props.log(userMatched) */
     }
 }
       
