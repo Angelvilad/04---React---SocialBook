@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './App.css';
+
+import { getData } from './store/actions/userData';
 
 import Header from './components/Header';
 import LoginForm from './components/LoginForm';
@@ -10,17 +12,6 @@ import MainLogout from './components/MainLogout';
 import Profile from './components/Profile';
 import Restringed from './components/Restringed';
 import PageNotFound from './components/PageNotFound';
-
-//Action Creator (thunk)
-const USERDATA_RETRIEVED = 'USERDATA_RETRIEVED';
-const getData = (userid) => dispatch => {
-let data = JSON.parse(localStorage.getItem(userid));
-if (!data) {
-  data = {friends: [], friendRequest: [], articles: []}
-  localStorage.setItem(userid, JSON.stringify(data));
-}
-  dispatch({ type: USERDATA_RETRIEVED, payload: data });
-}
 
 class AppView extends Component {
   render () {
@@ -45,7 +36,7 @@ class AppView extends Component {
     const { user } = this.props.login;
     const userData = this.props.userData.data;
     if (user && !userData) {
-      //localStorage.removeItem(user.login.uuid); // Funcion para borrar el localStorage del usuario loggeado
+      //localStorage.clear(); // Funcion para borrar el localStorage
       this.props.getUserData(user.login.uuid);
     }
   }

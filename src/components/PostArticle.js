@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
-/*const ARTICLE_POSTED = 'ARTICLE_POSTED';
-const postArticle = (article, userId) => dispatch => {
-    localStorage.setItem() //hacer el itemstorage en el reducer??
-}*/
-
 class PostArticleView extends Component {
     render () {
         return (

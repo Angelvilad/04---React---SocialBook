@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
 import Article from './Article';
 
@@ -24,9 +23,4 @@ const Articles = (props) => {
     }    
 }
 
-/*const Articles = connect(
-    state => ({
-        articles: state.userData.data.articles
-    }),
-)(ArticlesView);*/
 export default Articles;

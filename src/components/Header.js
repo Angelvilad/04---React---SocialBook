@@ -2,11 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-// Action Creators
-const LOGOUT = 'LOGOUT';
-const doLogOut = () => ({
-  type: LOGOUT
-});
+import { doLogOut } from '../store/actions/login';
 
 const HeaderView = (props) =>
   <header>

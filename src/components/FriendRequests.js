@@ -7,16 +7,13 @@ const FriendRequestsView = (props) => {
     const authors = props.authors.data;
     const userId = props.user.login.uuid
     const dataUser = JSON.parse(localStorage.getItem(userId));
-    const friendRequest = dataUser.friendRequest
-    const friendRequesters = []
+    const friendRequestReceived = dataUser.friendRequestReceived
+    let friendRequesters = []
     
-    friendRequest.forEach((friendId) => {
-        const [author] = authors.filter( author => author.login.uuid === friendId);
-        friendRequesters.unshift(author);
+    friendRequestReceived.forEach((authorId) => {
+        friendRequesters = authors.filter( author => author.login.uuid === authorId);
         }
     );
-
-    console.log(friendRequesters);
     
     return(
         <div className="friend-requests-wrapper">
@@ -33,8 +30,6 @@ const FriendRequestsView = (props) => {
         </div>
     );
 }
-
-
 
 const FriendRequests = connect(
     state => ({
