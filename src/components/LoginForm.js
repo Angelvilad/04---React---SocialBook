@@ -6,11 +6,18 @@ import styled from 'styled-components';
 import { doLog } from '../store/actions/login';
 import { fetchAuthors } from '../store/actions/authors';
 
+import ErrorLogin from './ErrorLogin';
+
 class LoginFormView extends Component {
     render () {
       const isLoading = this.props.authors.loading;
+      const errorLogin = this.state.errorLogin;
       return (
         <div className={this.props.className}>
+          {
+            errorLogin &&
+            <ErrorLogin onAcept={() => {this.setState({errorLogin: false}); console.log(this.state)}}/>
+          }          
           <label>
             <p>Nombre de usuario:</p>
             <input onChange={(event) => this.updateState(event, 'userInput')}/>
@@ -36,7 +43,8 @@ class LoginFormView extends Component {
     }
     state = {
       userInput:'',
-      passInput: ''
+      passInput: '',
+      errorLogin: false
     }
     componentDidMount() {
       this.props.getAuthors();
@@ -51,6 +59,8 @@ class LoginFormView extends Component {
         author => author.login.username === this.state.userInput && author.login.password === this.state.passInput);
       if (userMatched)  {
         this.props.log(userMatched);
+      } else {
+        this.setState({errorLogin: true});
       }
     }
 }
