@@ -8,7 +8,8 @@ import { doLogOut } from '../store/actions/login';
 const HeaderView = (props) =>
   <header className={props.className}>
     <div className="main-title">
-      <h1><Link to="/">SocialBook</Link></h1>
+      <h1 className="complete-logo"><Link to="/">SocialBook</Link></h1>
+      <h1 className="abbr-logo"><Link to="/">SB</Link></h1>
     </div>    
     <div className="nav-menu">
       <nav>
@@ -37,12 +38,20 @@ const HeaderView = (props) =>
   )(HeaderView);
 
   export default styled(Header)`
+    position: sticky;
+    top: 0;
     background-color: ${({theme}) => theme.colors.main};
     min-height: 89px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 ${({theme}) => theme.padding.gutter};
+    flex: 1;
+    & .main-title {
+      & > .complete-logo {
+        display: none
+      }
+    }    
     & a {
       text-decoration: none;
       color: white;
@@ -54,4 +63,14 @@ const HeaderView = (props) =>
     & li {
       padding: 0 ${({theme}) => theme.padding.gutter};
     }
+    @media only screen and (min-width: 600px) {
+      & > .main-title {
+        & > .complete-logo {
+          display: block;
+        }
+        & > .abbr-logo {
+          display: none;
+        }
+      }
+  }
   `;

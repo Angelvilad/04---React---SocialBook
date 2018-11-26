@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import styled from 'styled-components';
 
 class PostArticleView extends Component {
     render () {
         return (
-            <div className="postarticle-wrapper">
+            <div className={this.props.className}>
                 <p><label>Publicar articulo:&nbsp;</label></p>
                 <textarea onChange={(event) => this.updateState(event)}></textarea>
                 {<button onClick={this.postArticle}>Enviar</button>}
@@ -41,4 +42,11 @@ const PostArticle = connect(
     })
 )(PostArticleView);
 
-export default PostArticle;
+export default styled(PostArticle)`
+    & > textarea {
+        resize: none
+        box-sizing: border-box;
+        width: 100%;
+        height: 15rem;
+    }
+`;

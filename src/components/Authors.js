@@ -1,10 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {connect} from 'react-redux'
+import styled from 'styled-components';
 
 import Author from './Author';
 
 const AuthorsView = (props) =>
-    <div className="Authors-wrapper">
+    <div className={props.className}>
         <ul>
             {
                 props.authors.data.filter(author =>
@@ -25,4 +26,22 @@ const Authors = connect(
     }),
 )(AuthorsView);
 
-export default Authors;
+export default styled(Authors)`
+    display: flex;
+    justify-content: center;
+    & ul {
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        & li {
+            width: 100%;
+            @media only screen and (min-width: 600px) {
+                width: 50%;
+              }
+            @media only screen and (min-width: 1200px) {
+                width: 33%;
+              }
+        }
+    }
+`;

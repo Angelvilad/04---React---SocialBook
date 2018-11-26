@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import styled from 'styled-components';
 
 import { doLog } from '../store/actions/login';
 import { fetchAuthors } from '../store/actions/authors';
@@ -9,9 +10,15 @@ class LoginFormView extends Component {
     render () {
       const isLoading = this.props.authors.loading;
       return (
-        <div className="login-form-wrapper">
-          <label>Nombre de usuario:&nbsp;<input onChange={(event) => this.updateState(event, 'userInput')}/></label>
-          <label>Password:&nbsp;<input onChange={(event) => this.updateState(event, 'passInput')}/></label>
+        <div className={this.props.className}>
+          <label>
+            <p>Nombre de usuario:</p>
+            <input onChange={(event) => this.updateState(event, 'userInput')}/>
+          </label>
+          <label>
+            <p>Password:</p>
+            <input onChange={(event) => this.updateState(event, 'passInput')}/>
+          </label>
           {
             !isLoading &&
             <button onClick={this.checkLogin} >Enviar</button>
@@ -59,4 +66,15 @@ const LoginForm = connect(
     })
   )(LoginFormView);
 
-  export default LoginForm;
+  export default styled(LoginForm)`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: ${({theme})=> theme.padding.gutter}
+    & > label {
+      margin-bottom: ${({theme}) => theme.padding.gutter};
+      & > p {
+        margin: 0;
+      }
+    }
+  `;

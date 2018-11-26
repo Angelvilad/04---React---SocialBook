@@ -1,26 +1,36 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import Article from './Article';
 
 const Articles = (props) => {
     if (props.articles.length === 0) {
         return (
-            <div className="articles-wrapper">
+            <div className={props.className}>
                 <h2>Todavia no ha escrito ningun artículo.</h2>
             </div>
         );
     } else {
         return (
-            <div className="articles-wrapper">
+            <div className={props.className}>
                 <h2>Listado de articulos</h2>
-                {
-                    props.articles.map(article =>
-                    <li key={article.date} ><Article details={article}/></li>
-                    )
-                }  
+                <ul>
+                    {
+                        props.articles.map(article =>
+                        <li key={article.date} ><Article details={article}/></li>
+                        )
+                    }  
+                </ul>                
             </div>
         );
     }    
 }
 
-export default Articles;
+export default styled(Articles)`
+    & > h2 {
+        text-align: center;
+    }
+    & > ul {
+        list-style: none;
+    }
+`;

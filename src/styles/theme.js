@@ -8,7 +8,9 @@ const theme = {
         main: '"Poppins", sans-serif'
     },
     colors: {
-        main: 'blue'
+        main: 'blue',
+        secondary: 'white',
+        boxShadow: '5px 5px 5px grey'
     },
     padding: {
         gutter: '30px'
