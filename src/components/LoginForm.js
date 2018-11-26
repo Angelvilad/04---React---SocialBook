@@ -66,7 +66,14 @@ const LoginForm = connect(
     })
   )(LoginFormView);
 
-  export default styled(LoginForm)`
+  /* 
+En la v3 de styled-components bastaba con exportar la funcion que devolvia "styled",
+ahora en la v4 se lanza un warning porque "styled" devuelve un objeto en lugar de una funcion y
+cuando se pasa por el atributo "component" a "Route" (en app.js) se queja de esto.
+Soluciono devolviendo funcion (en JSX) que recibe parametros (funcion que interpola React mediante JSX..?)
+*/
+  
+  const LoginFormStyled = styled(LoginForm)`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -78,3 +85,5 @@ const LoginForm = connect(
       }
     }
   `;
+
+  export default props => <LoginFormStyled {...props} />

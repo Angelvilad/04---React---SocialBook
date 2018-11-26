@@ -109,7 +109,14 @@ const Profile = connect(
     })
 )(ProfileView);
 
-export default styled(Profile)`       
+/* 
+En la v3 de styled-components bastaba con exportar la funcion que devolvia "styled",
+ahora en la v4 se lanza un warning porque "styled" devuelve un objeto en lugar de una funcion y
+cuando se pasa por el atributo "component" a "Route" (en app.js) se queja de esto.
+Soluciono devolviendo funcion (en JSX) que recibe parametros (funcion que interpola React mediante JSX..?)
+*/
+
+const ProfileStyled = styled(Profile)`       
     & > h2 {
         text-align: center;
     }
@@ -191,3 +198,5 @@ export default styled(Profile)`
         text-transform: capitalize;
     }
 `;
+
+export default props => <ProfileStyled {...props} />

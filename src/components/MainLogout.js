@@ -8,7 +8,14 @@ const MainLogout = (props) =>
         <img src={portada} alt="App cover"/>
     </div>
 
-export default styled(MainLogout)`
+/* 
+En la v3 de styled-components bastaba con exportar la funcion que devolvia "styled",
+ahora en la v4 se lanza un warning porque "styled" devuelve un objeto en lugar de una funcion y
+cuando se pasa por el atributo "component" a "Route" (en app.js) se queja de esto.
+Soluciono devolviendo funcion (en JSX) que recibe parametros (funcion que interpola React mediante JSX..?)
+*/
+
+const MainLogoutStyled = styled(MainLogout)`
     display: flex;
     justify-content: center;
      & img {
@@ -17,3 +24,5 @@ export default styled(MainLogout)`
         object-fit: cover;
     }
 `
+
+export default props => <MainLogoutStyled {...props} />
