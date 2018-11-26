@@ -3,8 +3,6 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 //import './App.css';
 
-import { getData } from './store/actions/userData';
-
 import Header from './components/Header';
 import LoginForm from './components/LoginForm';
 import Main from './components/Main';
@@ -29,26 +27,12 @@ class AppView extends Component {
       </BrowserRouter>
     );    
   }
-  componentDidUpdate() {
-    /*user is logged and not retrieved data yet? Then retrieve user data */
-    /* mirar si en lugar de cuando se actualice, se haga esto cuando el usuario haga log */
-
-    const { user } = this.props.login;
-    const userData = this.props.userData.data;
-    if (user && !userData) {
-      //localStorage.clear(); // Funcion para borrar el localStorage
-      this.props.getUserData(user.login.uuid);
-    }
-  }
 }
 
 const App = connect(
   state => ({
     login: state.login,
     userData: state.userData
-  }),
-  dispatch => ({
-      getUserData: (userid) => dispatch(getData(userid))
   })
 )(AppView);
 export default App;

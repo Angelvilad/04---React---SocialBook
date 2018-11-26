@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { doLog } from '../store/actions/login';
 import { fetchAuthors } from '../store/actions/authors';
+import { getData } from '../store/actions/userData';
 
 import ErrorLogin from './ErrorLogin';
 
@@ -58,6 +59,7 @@ class LoginFormView extends Component {
       const [userMatched] = this.props.authors.data.filter(
         author => author.login.username === this.state.userInput && author.login.password === this.state.passInput);
       if (userMatched)  {
+        this.props.getUserData(userMatched.login.uuid);
         this.props.log(userMatched);
       } else {
         this.setState({errorLogin: true});
@@ -73,7 +75,8 @@ const LoginForm = connect(
     dispatch => ({
         log : (user) => dispatch(doLog(user)),
         getAuthors: () => dispatch(fetchAuthors()),
-    })
+        getUserData: (userid) => dispatch(getData(userid))
+      })
   )(LoginFormView);
 
   /* 
